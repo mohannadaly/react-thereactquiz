@@ -8,6 +8,8 @@ import ErrorElement from "./components/ui/ErrorElement";
 import Result from "./components/Result/Result";
 import Main from "./components/Main/Main";
 
+const SECS_PER_QUESTION = 30;
+
 const initialState = {
   questions: [],
   currentQuestion: -1,
@@ -15,6 +17,7 @@ const initialState = {
   score: 0,
   highScore: 0,
   answer: -1,
+  secondsRemaining: null,
 };
 
 function reducer(state, action) {
@@ -26,6 +29,7 @@ function reducer(state, action) {
       return { ...state, status: "error" };
     }
     case "setquestions": {
+      initialState.secondsRemaining = action.payload.length * SECS_PER_QUESTION;
       return {
         ...initialState,
         questions: action.payload,
@@ -33,7 +37,11 @@ function reducer(state, action) {
       };
     }
     case "restart": {
-      return { ...state, status: "ready", currentQuestion: -1 };
+      return {
+        ...initialState,
+        questions: state.questions,
+        highScore: state.highScore,
+      };
     }
     case "start": {
       return { ...state, currentQuestion: 0 };
@@ -62,6 +70,15 @@ function reducer(state, action) {
         currentQuestion: -1,
         highScore:
           state.score > state.highScore ? state.score : state.highScore,
+      };
+    }
+    case "tick": {
+      return {
+        ...state,
+        secondsRemaining: state.secondsRemaining - 1,
+        status: state.secondsRemaining < 1 ? "finished" : state.status,
+        currentQuestion:
+          state.secondsRemaining < 1 ? -1 : state.currentQuestion,
       };
     }
   }
@@ -102,7 +119,7 @@ function App() {
             dispatch={dispatch}
           />
         )}
-        {state.currentQuestion > -1 && (
+        {state.currentQuestion !== -1 && (
           <Questions state={state} dispatch={dispatch} />
         )}
         {state.status === "finished" && (

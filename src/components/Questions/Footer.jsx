@@ -1,6 +1,6 @@
-import styles from "./styles.module.css";
 import PropTypes from "prop-types";
 import Button from "../Button/Button";
+import Timer from "./Timer";
 
 Footer.propTypes = {
   state: PropTypes.object,
@@ -10,7 +10,7 @@ function Footer({ state, dispatch }) {
   const isLastQuestion = state.currentQuestion === state.questions.length - 1;
   return (
     <footer>
-      <div className={styles.timer}>00:00</div>
+      <Timer state={state} dispatch={dispatch} />
       <Button
         onClick={() => {
           dispatch({ type: isLastQuestion ? "finish" : "next" });
