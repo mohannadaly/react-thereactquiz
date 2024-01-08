@@ -1,10 +1,8 @@
 import styles from "./styles.module.css";
-function Button({ children, onClick, isOption, classes, isDisabled }) {
+function Button({ children, onClick, isUIButton = true, classes, isDisabled }) {
   return (
     <button
-      className={`${styles.btn} ${
-        isOption ? styles.btnOption : styles.btnUI
-      } ${classes}`}
+      className={`${styles.btn} ${isUIButton ? styles.btnUI : ""} ${classes}`}
       onClick={onClick}
       disabled={isDisabled}
     >

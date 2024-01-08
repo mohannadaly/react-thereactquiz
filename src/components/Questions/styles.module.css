@@ -14,12 +14,21 @@
   margin-bottom: 3.2rem;
 }
 
-.correct {
+.btnOption {
+  width: 100%;
+  text-align: left;
+}
+
+.btn-option:not([disabled]):hover {
+  transform: translateX(1.2rem);
+}
+
+.btnOption.correct {
   background-color: var(--color-theme);
   border: 2px solid var(--color-theme);
   color: var(--color-light);
 }
-.wrong {
+.btnOption.wrong {
   background-color: var(--color-accent);
   border: 2px solid var(--color-accent);
   color: var(--color-darkest);

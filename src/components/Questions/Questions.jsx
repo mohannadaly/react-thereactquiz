@@ -17,7 +17,7 @@ function Questions({ state, dispatch }) {
       <div>
         <h4>{currentQuestion}</h4>
         <div className={styles.options}>
-          <Options state={state} dispatch={dispatch} styles={styles} />
+          <Options state={state} dispatch={dispatch} />
         </div>
       </div>
       <Footer state={state} dispatch={dispatch} />
