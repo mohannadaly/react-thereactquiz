@@ -1,0 +1,33 @@
+.btn {
+  display: block;
+  font-family: inherit;
+  color: inherit;
+  font-size: 2rem;
+  border: 2px solid var(--color-dark);
+  background-color: var(--color-dark);
+  padding: 1.2rem 2.4rem;
+  cursor: pointer;
+  border-radius: 100px;
+  transition: 0.3s;
+}
+
+.btn:not([disabled]):hover {
+  background-color: var(--color-darkest);
+  transform: translateX(1.2rem);
+}
+
+.btn[disabled]:hover {
+  cursor: not-allowed;
+}
+
+.btnUI {
+  float: right;
+}
+.btnOption {
+  width: 100%;
+  text-align: left;
+}
+
+.btn-option:not([disabled]):hover {
+  transform: translateX(1.2rem);
+}
